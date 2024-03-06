@@ -14,7 +14,7 @@ export const TeamWordsDB = {
 }
 
 export const  PalmeirasWorldwideDB= {
-    probablyWords: ["venceu", "ganhou", "conquistou", "possui", "detém", "obteve"],
+    probablyWords: ["venceu", "ganhou", "conquistou", "possui", "detém", "obteve", "palmeiras", "mundial"],
     matched: 0,
 }
 
@@ -23,10 +23,13 @@ export const disposableDB = {
     matched: 0,
 }
 
+export const wordDB = [SoccerWordsDB, RulesWordsDB, TeamWordsDB, PalmeirasWorldwideDB, disposableDB]
+
 function showAnswer(index) {
     switch (index) {
         case 0:
             return "O futebol é o esporte coletivo mais praticado do mundo. É disputado por duas equipes."
+
         break;
 
         case 1:
@@ -46,39 +49,16 @@ function showAnswer(index) {
     }
 }
 
-export function deductionQuestion(question){
-    compareQuestionInDB(question)
-}
-
-export function compareQuestion(DB, wordsQuestion){
-        for(let i = 0; i < DB.probablyWords.length ; ++i){
-            wordsQuestion.forEach((element) => {
-                    if(DB.probablyWords[i] === element){
-                        DB.matched++
-                    }
-            });
-    }
-} 
-
 export function mostProbablyQuestion() {
     let matches = [
-        SoccerWordsDB.matched, 
+        SoccerWordsDB.matched,
         RulesWordsDB.matched, 
         TeamWordsDB.matched,
         PalmeirasWorldwideDB.matched, 
-        disposableDB.matched
+        disposableDB.matched,
     ]
 
     // Vê quantas palavras de cada pergunta foi usada
     return showAnswer(matches.indexOf(Math.max(...matches)))
-}
-
-export function compareQuestionInDB(wordsQuestion){
-    compareQuestion(SoccerWordsDB, wordsQuestion)
-    compareQuestion(RulesWordsDB, wordsQuestion)
-    compareQuestion(PalmeirasWorldwideDB, wordsQuestion)
-    compareQuestion(TeamWordsDB, wordsQuestion)
-    compareQuestion(disposableDB, wordsQuestion)
-    mostProbablyQuestion()
 }
 

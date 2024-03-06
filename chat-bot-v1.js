@@ -1,7 +1,16 @@
-import { SoccerWordsDB, RulesWordsDB, TeamWordsDB, PalmeirasWorldwideDB, disposableDB, mostProbablyQuestion, compareQuestion, deductionQuestion} from './can-i-answer.js'
+import {wordDB, mostProbablyQuestion} from './can-i-answer.js'
 
 
-let pergunta = "O Palmeiras tem mundial chatbot ?".toLowerCase().split(" ") 
-pergunta = pergunta[pergunta.length -1] === "?" ? pergunta.slice(0, -1) : pergunta
+let question = "O Palmeiras tem mundial chatbot ?".toLowerCase().split(" ") 
+question = question[question.length -1] === "?" ? question.slice(0, -1) : question
 
-compareQuestion(pergunta)
+for (let i = 0; i < question.length; ++i) {
+    for (let j = 0; j < wordDB.length; ++j) {
+        if (wordDB[j].probablyWords.indexOf(question[i]) !== -1) {
+            wordDB[j].matched++
+        }
+    }
+}
+
+
+console.log(mostProbablyQuestion())
